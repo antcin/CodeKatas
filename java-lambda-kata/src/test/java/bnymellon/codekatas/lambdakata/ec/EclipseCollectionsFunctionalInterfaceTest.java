@@ -54,14 +54,18 @@ public class EclipseCollectionsFunctionalInterfaceTest
         final var result = Lists.mutable.empty();
 
         // TODO - Convert the anonymous inner class to a lambda
-        var procedure = new Procedure<String>()
-        {
-            @Override
-            public void value(String each)
-            {
-                result.add(each.toUpperCase());
-            }
+        Procedure<String> procedure = (String string) -> {
+            result.add(string.toUpperCase());
         };
+
+//        var procedure = new Procedure<String>()
+//        {
+//            @Override
+//            public void value(String each)
+//            {
+//                result.add(each.toUpperCase());
+//            }
+//        };
         procedure.accept("zero");
         Assert.assertEquals(Lists.mutable.with("ZERO"), result);
         strings.each(procedure);
@@ -74,14 +78,16 @@ public class EclipseCollectionsFunctionalInterfaceTest
         var numbers = Interval.oneTo(10).toList();
 
         // TODO - Convert the anonymous inner class to a lambda
-        var evenPredicate = new Predicate<Integer>()
-        {
-            @Override
-            public boolean accept(Integer integer)
-            {
-                return integer % 2 == 0;
-            }
-        };
+        Predicate<Integer> evenPredicate = (Integer integer) -> integer % 2 == 0;
+
+//        var evenPredicate = new Predicate<Integer>()
+//        {
+//            @Override
+//            public boolean accept(Integer integer)
+//            {
+//                return integer % 2 == 0;
+//            }
+//        };
         Assert.assertTrue(evenPredicate.test(2));
         Assert.assertFalse(evenPredicate.test(1));
         MutableList<Integer> evens = numbers.select(evenPredicate);
